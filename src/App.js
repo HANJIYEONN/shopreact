@@ -6,12 +6,14 @@ import bg from './bg.jpg'
 import React, { useState } from 'react';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import data from './data.js';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import DetailPage from './page/DetailPage.js';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   
   let [shoes] = useState(data);
+  let navigate = useNavigate();
 
   return (
     <div className="App">
@@ -19,14 +21,16 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
-            {/* <Link to="/">홈</Link>
-            <Link to="/detail">상세페이지</Link> */}
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/detail">Detail</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            {/* <Link to="/" style={{marginRight:30}}>Home</Link> */}
+            <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
+            {/* <Link to="/detail" style={{marginRight:30}}>Detail</Link> */}
+            <Link to="/Pricing">Pricing</Link>
           </Nav>
         </Container>
       </Navbar>
+
+
 
       <Routes>
         <Route path="/" element={
@@ -45,7 +49,7 @@ function App() {
             </div>
           </>
         }/>
-        <Route path="/detail" element={<div>상세페이지임</div>}/>
+        <Route path="/detail" element={<DetailPage/>} />
         <Route path="/about" element={<div>어바웃페이지임</div>}/>
       </Routes>
     </div>
